@@ -107,7 +107,7 @@ for (let i = 0; i < images.length; i++) {
   img.setAttribute('data-source', original);
   img.setAttribute('alt', description);
   a.append(img);
-  elements.join(li);
+  elements.push(li);
 };
   
 list.append(...elements);
@@ -121,11 +121,11 @@ list.addEventListener('click', (event) => {
     <img src="${event.target.dataset.source}" width="1112" height="640">`);
     modalWindowShow.show();
     
-    list.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
-      modalWindowShow.close();
+      modalWindowShow.close({ once: true });
     };
-  }, { once: true })
+  })
   }
 })
 
