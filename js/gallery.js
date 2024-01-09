@@ -111,24 +111,25 @@ for (let i = 0; i < images.length; i++) {
 };
   
 list.append(...elements);
-  
+
 list.addEventListener('click', (event) => {
 
   event.preventDefault();
-        
-  if (event.target.tagName === 'IMG') {
-
-    const modalWindow = basicLightbox.create(`<img src="${event.target.dataset.source}" width="1112" height="640">`,
-      {
-        onShow: document.addEventListener('keydown', (event) => {
+    
+    const keydownHandler = (event) => {
       if (event.key === 'Escape') {
-        modalWindow.close()}}),
-        onclose: document.removeEventListener('keydown', (event) => {
-      if (event.key === 'Escape') {
-        modalWindow.close()}}),
+        modalInstance.close();
       }
-    )
-    modalWindow.show();
-  }
+    };
 
-  })
+    const modalInstance = basicLightbox.create(`<img src="${event.target.dataset.source}" width="1112" height="640">`, {
+      onShow: () => {
+        document.addEventListener('keydown', keydownHandler);
+      },
+      onClose: () => {
+        document.removeEventListener('keydown', keydownHandler);
+      },
+    });
+
+    modalInstance.show();
+})
