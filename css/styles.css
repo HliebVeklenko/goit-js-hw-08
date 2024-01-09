@@ -4,6 +4,10 @@ ol {
 }
 
 .gallery {
+  margin-right: auto;
+  margin-left: auto;
+  width: 1440px;
+  height: 696px;
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
@@ -13,4 +17,5 @@ ol {
 .gallery-image {
   width: 360px;
   height: 200px;
+  flex-grow: 1;
 }

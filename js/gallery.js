@@ -115,9 +115,9 @@ list.append(...elements);
 list.addEventListener('click', (event) => {
 
   event.preventDefault();
-
+        
   if (event.target.tagName === 'IMG') {
-    
+
     const modalWindow = basicLightbox.create(`<img src="${event.target.dataset.source}" width="1112" height="640">`,
       {
         onShow: document.addEventListener('keydown', (event) => {
