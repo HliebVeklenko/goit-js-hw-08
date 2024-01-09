@@ -117,15 +117,18 @@ list.addEventListener('click', (event) => {
   event.preventDefault();
 
   if (event.target.tagName === 'IMG') {
-    const modalWindowShow = basicLightbox.create(`
-    <img src="${event.target.dataset.source}" width="1112" height="640">`);
-    modalWindowShow.show();
     
-    document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      modalWindowShow.close({ once: true });
-    };
-  })
+    const modalWindow = basicLightbox.create(`<img src="${event.target.dataset.source}" width="1112" height="640">`,
+      {
+        onShow: document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        modalWindow.close()}}),
+        onclose: document.removeEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        modalWindow.close()}}),
+      }
+    )
+    modalWindow.show();
   }
-})
 
+  })
